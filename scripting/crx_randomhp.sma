@@ -1,7 +1,8 @@
 #include <amxmodx>
+#include <cromchat>
 #include <fun>
 
-#define PLUGIN_VERSION "2.0"
+#define PLUGIN_VERSION "2.1"
 
 enum _:Cvars
 {
@@ -13,7 +14,6 @@ enum _:Cvars
 }
 
 new g_eCvars[Cvars]
-new g_iSayText
 
 public plugin_init()
 {
@@ -21,8 +21,7 @@ public plugin_init()
 	register_cvar("RandomHP", PLUGIN_VERSION, FCVAR_SERVER|FCVAR_SPONLY|FCVAR_UNLOGGED)
 	register_dictionary("RandomHP.txt")
 	
-	register_logevent("OnRoundStart", 2, "1=Round_Start")
-	g_iSayText = get_user_msgid("SayText")
+	register_logevent("OnRoundStart", 2, "1=Round_Start")	
 	
 	g_eCvars[randomhp_vip_flag] = register_cvar("randomhp_vip_flag", "b")
 	g_eCvars[randomhp_amount] = register_cvar("randomhp_amount", "20")
@@ -69,33 +68,6 @@ public OnRoundStart()
 			iHealth = random_num(iHealth, iHealth + iRandom)
 		
 		set_user_health(id, get_user_health(id) + iHealth)
-		ColorChat(0, "%L", LANG_PLAYER, "RANDOM_HEALTH", szName, iHealth)
-	}
-}
-	
-ColorChat(const id, const szInput[], any:...)
-{
-	new iPlayers[32], iCount = 1
-	static szMessage[191]
-	vformat(szMessage, charsmax(szMessage), szInput, 3)
-	
-	replace_all(szMessage, charsmax(szMessage), "!g", "^4")
-	replace_all(szMessage, charsmax(szMessage), "!n", "^1")
-	replace_all(szMessage, charsmax(szMessage), "!t", "^3")
-	
-	if(id)
-		iPlayers[0] = id
-	else
-		get_players(iPlayers, iCount, "ch")
-	
-	for(new i; i < iCount; i++)
-	{
-		if(is_user_connected(iPlayers[i]))
-		{
-			message_begin(MSG_ONE_UNRELIABLE, g_iSayText, _, iPlayers[i])
-			write_byte(iPlayers[i])
-			write_string(szMessage)
-			message_end()
-		}
+		CC_SendMatched(0, id, "%L", LANG_PLAYER, "RANDOM_HEALTH", szName, iHealth)
 	}
 }

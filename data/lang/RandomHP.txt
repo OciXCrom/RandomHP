@@ -1,11 +1,11 @@
 [en]
-RANDOM_HEALTH = !n[!gRandom HP!n] !t%s !nwas randomly chosen to get !g%i HP !nthis round.
+RANDOM_HEALTH = &x01[&x04Random HP&x01] &x03%s &x01was randomly chosen to get &x04%i HP &x01this round.
 
 [mk]
-RANDOM_HEALTH = !n[!gRandom HP!n] !t%s !nbeshe proizvolno izbran da dobie !g%i HP !novaa runda.
+RANDOM_HEALTH = &x01[&x04Random HP&x01] &x03%s &x01beshe proizvolno izbran da dobie &x04%i HP &x01ovaa runda.
 
 [bg]
-RANDOM_HEALTH = !n[!gRandom HP!n] !t%s !nbe proizvolno izbran da poluchi !g%i HP !ntozi rund.
+RANDOM_HEALTH = &x01[&x04Random HP&x01] &x03%s &x01be proizvolno izbran da poluchi &x04%i HP &x01tozi rund.
 
 [sr]
-RANDOM_HEALTH = !n[!gRandom HP!n] !t%s !nje bio slucajno izabran da dobie !g%i HP !nova runda.
+RANDOM_HEALTH = &x01[&x04Random HP&x01] &x03%s &x01je bio slucajno izabran da dobie &x04%i HP &x01ova runda.
