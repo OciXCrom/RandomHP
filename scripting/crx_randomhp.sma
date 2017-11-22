@@ -43,12 +43,7 @@ public OnRoundStart()
 		case 2: get_players(iPlayers, iPnum, "ae", "CT")
 	}
 	
-	if(!iPnum)
-		return
-		
-	new iMin = get_pcvar_num(g_eCvars[randomhp_min_players])
-	
-	if(iMin && iPnum < iMin)
+	if(!iPnum || iPnum < get_pcvar_num(g_eCvars[randomhp_min_players]))
 		return
 	
 	new id = iPlayers[random(iPnum)]
