@@ -2,15 +2,16 @@
 #include <cromchat>
 #include <fun>
 
-#define PLUGIN_VERSION "2.1"
+#define PLUGIN_VERSION "2.2"
 
 enum _:Cvars
 {
-	randomhp_vip_flag,
 	randomhp_amount,
-	randomhp_vip_amount,
 	randomhp_amount_random,
-	randomhp_team
+	randomhp_min_players,
+	randomhp_team,
+	randomhp_vip_amount,
+	randomhp_vip_flag
 }
 
 new g_eCvars[Cvars]
@@ -23,11 +24,12 @@ public plugin_init()
 	
 	register_logevent("OnRoundStart", 2, "1=Round_Start")	
 	
-	g_eCvars[randomhp_vip_flag] = register_cvar("randomhp_vip_flag", "b")
 	g_eCvars[randomhp_amount] = register_cvar("randomhp_amount", "20")
-	g_eCvars[randomhp_vip_amount] = register_cvar("randomhp_vip_amount", "0")
 	g_eCvars[randomhp_amount_random] = register_cvar("randomhp_amount_random", "0")
+	g_eCvars[randomhp_min_players] = register_cvar("randomhp_min_players", "0")
 	g_eCvars[randomhp_team] = register_cvar("randomhp_team", "0")
+	g_eCvars[randomhp_vip_amount] = register_cvar("randomhp_vip_amount", "0")
+	g_eCvars[randomhp_vip_flag] = register_cvar("randomhp_vip_flag", "b")
 }
 
 public OnRoundStart()
@@ -42,6 +44,11 @@ public OnRoundStart()
 	}
 	
 	if(!iPnum)
+		return
+		
+	new iMin = get_pcvar_num(g_eCvars[randomhp_min_players])
+	
+	if(iMin && iPnum < iMin)
 		return
 	
 	new id = iPlayers[random(iPnum)]
